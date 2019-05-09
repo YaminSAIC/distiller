@@ -84,6 +84,10 @@ def asymmetric_linear_quantization_params(num_bits, saturation_min, saturation_m
     return scale, zero_point
 
 
+
+##############################################################################
+# int8
+# confine the input between min and max.
 def clamp(input, min, max, inplace=False):
     if inplace:
         input.clamp_(min, max)
@@ -108,7 +112,7 @@ def linear_dequantize(input, scale, zero_point, inplace=False):
         input.add_(zero_point).div_(scale)
         return input
     return (input + zero_point) / scale
-
+##############################################################################
 
 def get_tensor_min_max(t, per_dim=None):
     if per_dim is None:
